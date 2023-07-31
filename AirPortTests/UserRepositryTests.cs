@@ -1,4 +1,5 @@
 using Airport.DAL;
+using System.Diagnostics;
 
 namespace AirPortTests
 {
@@ -6,21 +7,23 @@ namespace AirPortTests
     public class UserRepositryTests
     {
         [TestMethod]
-        public void VerifyemailTest()
+        public void AddNewUserTest()
         {
             //--arrange
             UserRepository userRepository = new UserRepository();
-            userRepository.Signup("mohamad,1234,1");
+            userRepository.Signup("moha,12345,0");
             
-            string expectedName = "mohamad";
-            string expectedPass = "1234";
-            string expectedLvl = "1";
+            string expectedName = "moha";
+            string expectedPass = "12345";
+            string expectedLvl = "0";
 
             //act
-            List<UserData> act = userRepository.GetAll();
+            List<UserData> act = userRepository.GetAllUsers();
+            Debug.WriteLine(act.Count);
             //--assert
-            foreach(UserData actual in act)
+            foreach (UserData actual in act)
             {
+                Debug.WriteLine(actual);
                 Assert.AreEqual(actual.UserName, expectedName);
                 Assert.AreEqual(actual.UserPassword, expectedPass);
                 Assert.AreEqual(actual.UserLevel, expectedLvl);
