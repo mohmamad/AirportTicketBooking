@@ -17,7 +17,7 @@ namespace AirPortTests
             const string bookingInfo = "1,100,palestine,china,August 10 2023 12:00,telitbees,lala,mohamad,economy";
             BookingRepository bookingRepository = new BookingRepository();
             bookingRepository.AddBooking(bookingInfo);
-            string exp = "2,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
+            string exp = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
             //--act
             List<BookingData> actual = new List<BookingData>();
             actual = bookingRepository.GetAllBookings();
@@ -41,11 +41,11 @@ namespace AirPortTests
         public void UpdateBookingTest()
         {
             //--arrange
-            const string oldBookingInfo = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
-            const string newBookingInfo = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
+            const string oldBookingInfo = "2,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
+            const string newBookingInfo = "2,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
             BookingRepository bookingRepository = new BookingRepository();
             bookingRepository.UpdateBooking(oldBookingInfo, newBookingInfo);
-            string exp = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
+            string exp = "2,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
 
             //--act
             List<BookingData> actual = new List<BookingData>();
@@ -73,8 +73,8 @@ namespace AirPortTests
           //  const string oldBookingInfo = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
             //const string newBookingInfo = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
             BookingRepository bookingRepository = new BookingRepository();
-            bookingRepository.DeleteBooking("2");
-            string exp = "1,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,business";
+            bookingRepository.DeleteBooking("1");
+            string exp = "2,1,100,palestine,china,8/10/2023 12:00,telitbees,lala,mohamad,economy";
 
             //--act
             List<BookingData> actual = new List<BookingData>();

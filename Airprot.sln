@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Airport.DAL", "..\DataRepository\Airport.DAL.csproj", "{C80D0ACD-7FCA-407A-BCF0-F5EBC1277C06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirPortTests", "AirPortTests\AirPortTests.csproj", "{92D8C4A0-03BC-499D-8FD1-475AC6B00051}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.DALTests", "AirPortTests\Airport.DALTests.csproj", "{92D8C4A0-03BC-499D-8FD1-475AC6B00051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
