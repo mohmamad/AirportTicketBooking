@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Airport.DAL", "..\DataRepos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.DALTests", "AirPortTests\Airport.DALTests.csproj", "{92D8C4A0-03BC-499D-8FD1-475AC6B00051}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.BLL", "Airport.BLL\Airport.BLL.csproj", "{627CF170-1461-41AC-B985-8DC7E2E15017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.BLLTests", "Airport.BLLTests\Airport.BLLTests.csproj", "{984785AF-F7B7-4DF5-96B0-45BB375343DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{92D8C4A0-03BC-499D-8FD1-475AC6B00051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92D8C4A0-03BC-499D-8FD1-475AC6B00051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92D8C4A0-03BC-499D-8FD1-475AC6B00051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{627CF170-1461-41AC-B985-8DC7E2E15017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{627CF170-1461-41AC-B985-8DC7E2E15017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{627CF170-1461-41AC-B985-8DC7E2E15017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{627CF170-1461-41AC-B985-8DC7E2E15017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984785AF-F7B7-4DF5-96B0-45BB375343DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984785AF-F7B7-4DF5-96B0-45BB375343DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984785AF-F7B7-4DF5-96B0-45BB375343DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984785AF-F7B7-4DF5-96B0-45BB375343DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
