@@ -1,6 +1,2 @@
-1,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
-1,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
-1,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
-2,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
-3,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
-4,palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150
+1,palestine,asdasd,8/10/2023 12:00,potato,tomato,Economy,100,Business,120
+1,palestine,asdasd,9/10/2023 12:00,potato,tomato,Economy,100,Business,120

@@ -13,18 +13,17 @@ namespace Airport.BLL
         public static string ConvertToCSV(FlightData flightData)
         {
             StringBuilder flight = new StringBuilder();
-            flight.AppendLine(flightData.FlightId + ",");
-            flight.AppendLine(flightData.DepartureCountry + ",");
-            flight.AppendLine(flightData.DestinationCountry + ",");
-            flight.AppendLine(flightData.DepartureDate + ",");
-            flight.AppendLine(flightData.DepartureAirport + ",");
-            flight.AppendLine(flightData.ArrivalAirport + ",");
-            flight.AppendLine(flightData.Class[0] + ",");
-            flight.AppendLine(flightData.FlightPrice[0] + ",");
-            flight.AppendLine(flightData.Class[1] + ",");
-            flight.AppendLine(flightData.FlightPrice[1] + ",");
-            flight.AppendLine(flightData.Class[2] + ",");
-            flight.AppendLine(flightData.FlightPrice[2] + ",");
+            flight.Append(flightData.FlightId + ",");
+            flight.Append(flightData.DepartureCountry + ",");
+            flight.Append(flightData.DestinationCountry + ",");
+            flight.Append(flightData.DepartureDate + ",");
+            flight.Append(flightData.DepartureAirport + ",");
+            flight.Append(flightData.ArrivalAirport + ",");
+            for(int i = 0; i < flightData.Class.Count; i++)
+            {
+                flight.Append(flightData.Class[i] + ",");
+                flight.Append(flightData.FlightPrice[i] + ",");
+            }
             return flight.ToString();
         }
       

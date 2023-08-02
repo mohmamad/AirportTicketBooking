@@ -12,11 +12,11 @@ namespace Airport.BLL
         List<string> requiredFields = new List<string>();
         public Validator() 
         {
-            requiredFields.Add("Departure country");
-            requiredFields.Add("Destination country");
-            requiredFields.Add("Departure date");
-            requiredFields.Add("Departure airport");
-            requiredFields.Add("Arival airport");
+            requiredFields.Add("Departure Country");
+            requiredFields.Add("Destination Country");
+            requiredFields.Add("Departure Date");
+            requiredFields.Add("Departure Airport");
+            requiredFields.Add("Arival Airport");
         }
 
         public enum ErrorMessages
@@ -31,34 +31,94 @@ namespace Airport.BLL
             NotAValidDate = 4,
             [Description("A non valid Price on line: ")]
             NotAValidPrice = 5,
+            [Description("Missing a required field: ")]
+            MissingRequiredField = 6,
             [Description("Valid flight")]
-            Success = 6
-        }
-        public  bool ValidCountry(string country)
-        {
-            foreach (char letter in country)
-            {
-                if (letter > 'a' && letter < 'z' || letter > 'A' && letter < 'Z')
-                {
-                    return true;
-                }
-            }
-            return false;
+            Success = 7
         }
 
-        public  string ValidateFlight(string flightInfo)
+        /// <summary>
+        /// returns true if the given country is valid
+        /// </summary>
+        public bool ValidCountry(string country)
         {
-            //input format
-            //depcountry,descountry,depDate,depAirport,ArriavalAirport,economy,price,bussenis,price,first class,price
-            //if (flightInfo == null)
-            //{
-            //    return ((DescriptionAttribute)Attribute.GetCustomAttribute((ErrorMessages.nullFlight.GetType().GetField(ErrorMessages.nullFlight.ToString())), typeof(DescriptionAttribute))).Description;
-            //}
+            foreach (char c in country)
+            {
+                if (char.IsDigit(c))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Returns the missing field of the flight information
+        /// </summary>
+        public string TheMissingField(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return "Departure Country";
+                    break;
+                case 1:
+                    return "Destination Country";
+                    break;
+                case 2:
+                    return "Departure Date";
+                    break;
+                case 3:
+                    return "Departure Airport";
+                    break;
+                case 4:
+                    return "Arival Airport";
+                    break;
+                case 5:
+                    return "Flight Class(economy)";
+                    break;
+                case 6:
+                    return "Flight Class Price(economy)";
+                    break;
+                case 7:
+                    return "Flight Class(business)";
+                    break;
+                case 8:
+                    return "Flight Class Price(business)";
+                    break;
+                case 9:
+                    return "Flight Class(first class)";
+                    break;
+               default:
+                    return "Flight Class Price(first class)";
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Returns an error message specifying what is wrong in the flight information
+        /// </summary>
+        public string ValidateFlight(string flightInfo)
+        {
+           
             string[] flightData = flightInfo.Split(',');
-            if (flightData.Length < 7)
+
+            //checks that the format is correct
+            if (flightData.Length < 11)
             {
                 return ((DescriptionAttribute)Attribute.GetCustomAttribute((ErrorMessages.MissingData.GetType().GetField(ErrorMessages.MissingData.ToString())), typeof(DescriptionAttribute))).Description;
             }
+
+            //checks if all the required input exists
+            for(int i = 0; i < flightData.Length; i++)
+            {
+                if (flightData[i] == " " && requiredFields.Contains(TheMissingField(i)))
+                {
+                    return ((DescriptionAttribute)Attribute.GetCustomAttribute((ErrorMessages.MissingRequiredField.GetType().GetField(ErrorMessages.MissingRequiredField.ToString())), typeof(DescriptionAttribute))).Description
+                        + $"{TheMissingField(i)} is missing on Line: ";
+                }
+            }
+           
+
+          
 
             ///country validation
             if (!ValidCountry(flightData[0]))
@@ -75,6 +135,7 @@ namespace Airport.BLL
                 return ((DescriptionAttribute)Attribute.GetCustomAttribute((ErrorMessages.NotAValidDate.GetType().GetField(ErrorMessages.NotAValidDate.ToString())), typeof(DescriptionAttribute))).Description;
             }
 
+            //price validation
             for (int i = 6; i < flightData.Length; i += 2)
             {
                 try

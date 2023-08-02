@@ -1,7 +1,7 @@
 ﻿using Airport.DAL;
 namespace Airport.BLL
 {
-    public class UserHandler
+    public class UserHandler : IUserHandler
     {
         UserRepository users = new UserRepository();
         public string Login(string userName , string password)
