@@ -1,4 +1,4 @@
-using Airport.DAL;
+using Airport.DAL.Repositories;
 using System.Diagnostics;
 
 namespace AirPortTests
@@ -11,22 +11,23 @@ namespace AirPortTests
         {
             //--arrange
             UserRepository userRepository = new UserRepository();
-            userRepository.Signup("moha,12345,0");
+            User user = new User { UserName = "moha", UserPassword = "1234" ,UserLevel = "0" };
+            userRepository.Signup(user);
             
             string expectedName = "moha";
-            string expectedPass = "12345";
+            string expectedPass = "1234";
             string expectedLvl = "0";
 
             //act
-            List<UserData> act = userRepository.GetAllUsers();
-            Debug.WriteLine(act.Count);
+            string[] act = userRepository.GetAllUsers();
+           // Debug.WriteLine(act.Count);
             //--assert
-            foreach (UserData actual in act)
+            foreach (string actual in act)
             {
                 Debug.WriteLine(actual);
-                Assert.AreEqual(actual.UserName, expectedName);
-                Assert.AreEqual(actual.UserPassword, expectedPass);
-                Assert.AreEqual(actual.UserLevel, expectedLvl);
+                Assert.AreEqual(actual.Split(',')[0], expectedName);
+                Assert.AreEqual(actual.Split(',')[1], expectedPass);
+                Assert.AreEqual(actual.Split(',')[2], expectedLvl);
             }
            
 

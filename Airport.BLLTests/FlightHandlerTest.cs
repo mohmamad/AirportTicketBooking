@@ -1,4 +1,5 @@
-using Airport.BLL;
+using Airport.BLL.Handlers;
+using Airport.BLL.Interfaces;
 
 namespace Airport.BLLTests
 {
@@ -9,16 +10,19 @@ namespace Airport.BLLTests
         public void AddFlightsTest()
         {
             //--arrange
-            FlightHandler flightHandler = new FlightHandler();
-            string expected = "A non valid Date on line: 3";
-            
+            IFlightHandler flightHandler = new FlightHandler();
+            string expected1 = "The country name most not have any numbers or special characters , The field DepartureDate is invalid. , the flight most have an arrival airport ,  On Line: 1";
+            string expected2 = "the flight most have a price , the flight most have a class ,  On Line: 2";
+            string expected3 = "Flights added successfully!";
             //--act
             List<string> actual = flightHandler.AddFlight("C:\\Users\\GoldenTech\\Desktop\\test.txt");
+            List<string> actual1 = flightHandler.AddFlight("C:\\Users\\GoldenTech\\Desktop\\test2.txt");
             //--assert
-            foreach (string act in actual) 
-            {
-                Assert.AreEqual(expected, act);
-            }
+
+            Assert.AreEqual(expected1, actual[0]);
+            Assert.AreEqual(expected2, actual[1]);
+            Assert.AreEqual(expected3, actual1[0]);
+
         }
 
         [TestMethod]
@@ -26,12 +30,15 @@ namespace Airport.BLLTests
         {
             //--arrange 
             FlightHandler flightHandler = new FlightHandler();
-            string expected = "1,\r\npalestine,\r\nasdasd,\r\n9/10/2023 12:00:00 PM,\r\npotato,\r\ntomato,\r\nEconomy,\r\n100,\r\nBusiness,\r\n120,\r\nEconomy,\r\n100,\r\nBusiness,\r\n120,";
-           //--act
+            string expected1 = "1,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120";
+            string expected2 = "2,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150";
+            string expected3 = "3,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150";
+            //--act
             List<string> act = flightHandler.ViewAllValidFlights();
             //--assert
-           // Assert.AreEqual(expected, act[0]);
-            Assert.AreEqual(expected, act[1]);
+            Assert.AreEqual(expected1, act[0]);
+            Assert.AreEqual(expected2, act[1]);
+            Assert.AreEqual(expected3, act[2]);
 
         }
 
@@ -40,12 +47,18 @@ namespace Airport.BLLTests
         {
             //--arrange 
             FlightHandler flightHandler = new FlightHandler();
-            string expected = "palestine,asdasd,8/10/2023 12:00,potato,tomato,Economy,100,Business,120";
+            List<string> expected = new List<string>();
+            expected.Add("2,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150");
+            expected.Add("3,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150");
             //--act
-            List<string> act = flightHandler.Search("palestine,asdasd,8/10/2023 12:00,potato,tomato,Economy,100,Business,120, , ");
+            List<string> act = flightHandler.Search("palestine, ,8/10/2023 12:00:00 PM, ,tomato,Economy,100,Business,120,First Class,150");
             //--assert
-             Assert.AreEqual(expected, act[0]);
-            
+            for(int i = 0; i < act.Count; i++)
+            {
+                Assert.AreEqual(expected[i], act[i]);
+
+            }
+
 
         }
 

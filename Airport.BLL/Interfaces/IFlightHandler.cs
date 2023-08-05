@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.BLL
+namespace Airport.BLL.Interfaces
 {
     public interface IFlightHandler
     {

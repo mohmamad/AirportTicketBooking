@@ -1,4 +1,4 @@
-﻿using Airport.DAL;
+﻿using Airport.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,29 +16,35 @@ namespace AirPortTests
             //--arrange
             const string flightInfo = "palestine,japan,8/10/2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150";
             FlightsRepository flightsRepository = new FlightsRepository();
-            flightsRepository.AddFlight(flightInfo);
-            string expected = "1,palestine,japan,August 10 2023 12:00,potato,tomato,Economy,100,Business,120,First Class,150";
+            List<string> classes = new List<string>();
+            List<int> prices = new List<int>();
+
+            classes.Add("Economy");
+            classes.Add("Business");
+            classes.Add("First Class");
+
+            prices.Add(100);
+            prices.Add(120);
+            prices.Add(150);
+            Flight flight = new Flight
+            {
+                DepartureCountry = "palestine",
+                DestinationCountry = "japan",
+                DepartureDate = DateTime.Parse("8/10/2023 12:00"),
+                DepartureAirport = "potato",
+                ArrivalAirport = "tomato",
+                Class = classes,
+                FlightPrice = prices
+            };
+            flightsRepository.AddFlight(flight);
+            string expected = "1,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150";
 
             //--act
-            List<FlightData> actual = flightsRepository.GetAllFlights();
+            string[] actual = flightsRepository.GetAllFlights();
 
             //--assert
-            foreach(FlightData act in actual)
-            {
-                Assert.AreEqual(act.FlightId , expected.Split(',')[0]);
-                Assert.AreEqual(act.DepartureCountry, expected.Split(',')[1]);
-                Assert.AreEqual(act.DestinationCountry, expected.Split(',')[2]);
-                Assert.AreEqual(act.DepartureDate, DateTime.Parse(expected.Split(',')[3]));
-                Assert.AreEqual(act.DepartureAirport, expected.Split(',')[4]);
-                Assert.AreEqual(act.ArrivalAirport, expected.Split(',')[5]);
-                Assert.AreEqual(act.Class[0], expected.Split(',')[6]);
-                Assert.AreEqual(act.FlightPrice[0], int.Parse(expected.Split(',')[7]));
-                Assert.AreEqual(act.Class[1], expected.Split(',')[8]);
-                Assert.AreEqual(act.FlightPrice[1], int.Parse(expected.Split(',')[9]));
-                Assert.AreEqual(act.Class[2], expected.Split(',')[10]);
-                Assert.AreEqual(act.FlightPrice[2], int.Parse(expected.Split(',')[11]));
-            }
-            
+            Assert.AreEqual(expected, actual[0]);
+
         }
     }
 }
