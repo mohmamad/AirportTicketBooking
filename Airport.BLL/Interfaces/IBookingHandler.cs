@@ -11,7 +11,7 @@ namespace Airport.BLL.Interfaces
         /// <summary>
         /// books a flight and adds a new booking info to booking file
         /// </summary>
-        public void Book(string flightInfo);
+        public void Book(string flightInfo , string userName);
 
         /// <summary>
         /// filters the bookings (Only For The Manager)
@@ -21,7 +21,7 @@ namespace Airport.BLL.Interfaces
         /// <summary>
         /// updates the booking class returns an error message
         /// </summary>
-        public string Update(string oldBookingInfo, string newBookingInfo);
+        public string Update(int bookingId, string newClass);
 
         /// <summary>
         /// returns a list of all the users bookings

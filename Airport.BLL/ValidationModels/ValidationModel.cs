@@ -1,4 +1,4 @@
-﻿using Airport.DAL;
+﻿using Airport.DAL.Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 

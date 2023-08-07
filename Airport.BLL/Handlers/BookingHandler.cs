@@ -3,6 +3,8 @@ using Airport.BLL.Interfaces;
 using Airport.BLL.Utilities;
 using Airport.DAL.Interfaces;
 using Airport.DAL.Repositories;
+using System.Linq;
+using System.Text;
 
 namespace Airport.BLL.Handlers
 
@@ -11,9 +13,17 @@ namespace Airport.BLL.Handlers
     {
         IBookingRepository Booking = new BookingRepository();
         BookingComposite filterBy = new BookingComposite();
-        public void Book(string bookingInfo)
+        public void Book(string bookingInfo , string userName)
         {
-            Booking.AddBooking(BookingHandlerUtils.ConvertToBookingData(bookingInfo.Split(',')));
+            //insert the correct user name to the booking info
+            StringBuilder newBook = new StringBuilder();
+            newBook.Append(bookingInfo.Split(',')[0] + ","); newBook.Append(bookingInfo.Split(',')[1] + ",");
+            newBook.Append(bookingInfo.Split(',')[2] + ","); newBook.Append(bookingInfo.Split(',')[3] + ",");
+            newBook.Append(bookingInfo.Split(',')[4] + ","); newBook.Append(bookingInfo.Split(',')[5] + ",");
+            newBook.Append(bookingInfo.Split(',')[6] + ","); newBook.Append(userName + ",");
+            newBook.Append(bookingInfo.Split(',')[7]);
+            
+            Booking.AddBooking(BookingHandlerUtils.ConvertToBookingData(newBook.ToString().Split(',')));
         }
 
         public List<string> Search(string bookingInfo)
@@ -56,19 +66,42 @@ namespace Airport.BLL.Handlers
             return CSVFoundBookings;
         }
 
-        public string Update(string oldBookingInfo, string newBookingInfo)
+        public string Update(int bookingId, string newclass)
         {
-            FlightHandler flight = new FlightHandler();
+            FlightsRepository flightsRepository = new FlightsRepository();
+            List<Flight> flights = new List<Flight>();
             string message = "";
-            string[] newBooking = newBookingInfo.Split(',');
-
-            if (!Booking.GetAllBookings().ToList().Contains(oldBookingInfo))
-                message = "Booking not found!";
-            else
+            Booking bookingToUpdate = new Booking();
+            Booking newBooking = new Booking();
+            List<Booking> bookings = new List<Booking>();
+            foreach(string booking in Booking.GetAllBookings())
             {
-                Booking.UpdateBooking(BookingHandlerUtils.ConvertToBookingData(oldBookingInfo.Split(','))
-            , BookingHandlerUtils.ConvertToBookingData(newBookingInfo.Split(','))); message = "Update was successful!";
+                bookings.Add(BookingHandlerUtils.ConvertToBookingData(booking.Split(',')));
             }
+            try
+            {
+                bookingToUpdate = bookings.Where(booking => booking.BookingId == bookingId).ToList()[0];
+            }catch (Exception ex) { message = "Booking not found!"; return message;}
+            foreach (string flightInfo in flightsRepository.GetAllFlights())
+            {
+                flights.Add(FlightHandlerUtils.ConvertToFlight(flightInfo));
+            }
+
+            //to change the price according to the new class
+            Flight flight = flights.Where(flight => flight.FlightId == int.Parse(bookingToUpdate.FlightId)).ToList()[0];
+            newBooking.DepartureCountry = bookingToUpdate.DepartureCountry;
+            newBooking.DestinationCountry = bookingToUpdate.DestinationCountry;
+            newBooking.DepartureDate = bookingToUpdate.DepartureDate;
+            newBooking.DepartureAirport = bookingToUpdate.DepartureAirport;
+            newBooking.ArrivalAirport = bookingToUpdate.ArrivalAirport;
+            newBooking.PassengerUserName = bookingToUpdate.PassengerUserName;
+            newBooking.FlightId = bookingToUpdate.FlightId;
+            newBooking.BookingId = bookingToUpdate.BookingId;
+            newBooking.Price = flight.FlightPrice[flight.Class.IndexOf(newclass)];
+            newBooking.Class = newclass;
+            
+            Booking.UpdateBooking(bookingToUpdate, newBooking); message = "Update was successful!";
+            
 
             return message;
         }

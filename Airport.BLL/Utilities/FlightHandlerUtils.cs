@@ -45,8 +45,10 @@ namespace Airport.BLL.Utilities
                 classes.Clear();
                 for (int i = 6; i < flight.Split(",").Length; i += 2)
                 {
-                    classes.Add(flight.Split(",")[i]);
-                    prices.Add(int.Parse(flight.Split(",")[i + 1]));
+                    if(flight.Split(",")[i] != " ")
+                        classes.Add(flight.Split(",")[i]);
+                    if (flight.Split(",")[i + 1] != " ")
+                        prices.Add(int.Parse(flight.Split(",")[i + 1]));
                 }
 
                 return new Flight
@@ -69,9 +71,12 @@ namespace Airport.BLL.Utilities
                 {
                     try
                     {
-                        prices.Add(int.Parse(flight.Split(",")[i + 1]));
-                        classes.Add(flight.Split(",")[i]);
-                    }catch (Exception) { }
+                        if (flight.Split(",")[i + 1] != " ")
+                            prices.Add(int.Parse(flight.Split(",")[i + 1]));
+                        if (flight.Split(",")[i] != " ")
+                            classes.Add(flight.Split(",")[i]);
+                    }
+                    catch (Exception) { }
                     
                 }
                 DateTime departureDate = new DateTime();

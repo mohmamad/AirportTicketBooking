@@ -1,0 +1,6 @@
+1*view valid flights
+2*search,<departurecountry>,<destination country>,<departure date>,<departure airport>,<arrival airport>,<flight class>,<price> please fill a " " in the field you do not want to search with.
+3*book,<flight id>,<flight price>,<departurecountry>,<destination country>,<departure date>,<departure airport>,<arrival airport>,<flight class> all the fields are required.
+4*update booking class,<booking id>,<new class>
+5*delete booking,<booking id>
+6*view all bookings

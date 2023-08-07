@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Airport.DAL.attributes;
 using Airport.DAL.Interfaces;
 using Airport.DAL.Utilities;
 

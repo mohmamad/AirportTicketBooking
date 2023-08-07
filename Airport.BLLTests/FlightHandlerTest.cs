@@ -51,7 +51,7 @@ namespace Airport.BLLTests
             expected.Add("2,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150");
             expected.Add("3,palestine,japan,8/10/2023 12:00:00 PM,potato,tomato,Economy,100,Business,120,First Class,150");
             //--act
-            List<string> act = flightHandler.Search("palestine, ,8/10/2023 12:00:00 PM, ,tomato,Economy,100,Business,120,First Class,150");
+            List<string> act = flightHandler.Search("palestine, ,8/10/2023 12:00:00 PM, ,tomato,Economy,100");
             //--assert
             for(int i = 0; i < act.Count; i++)
             {

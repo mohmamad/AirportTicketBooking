@@ -38,14 +38,28 @@ namespace Airport.BLL.Handlers
 
         }
 
-        public bool Signup(string userName, string password)
+        public string Signup(string userName, string password)
         {
-            if (Login(userName, password) != "login successfully!")
+            if (userName == "manager")
             {
-                users.Signup(UserHandlerUtils.ConvertToUser($"{userName},{password},0"));
-                return true;
+                if (Login(userName, password) != "login successfully!")
+                {
+                    users.Signup(UserHandlerUtils.ConvertToUser($"{userName},{password},1"));
+                    return "signup was successful";
+                }
+                return "signup failed user already exists";
             }
-            return false;
+            else
+            {
+                if (Login(userName, password) != "login successfully!")
+                {
+                    users.Signup(UserHandlerUtils.ConvertToUser($"{userName},{password},0"));
+                    return "signup was successful";
+                }
+                return "signup failed user already exists";
+            }
+            
+           
         }
     }
 }

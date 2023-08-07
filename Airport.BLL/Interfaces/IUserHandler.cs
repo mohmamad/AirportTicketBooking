@@ -17,6 +17,6 @@ namespace Airport.BLL.Interfaces
         /// <summary>
         /// adds a new user
         /// </summary>
-        public bool Signup(string userName, string password);
+        public string Signup(string userName, string password);
     }
 }

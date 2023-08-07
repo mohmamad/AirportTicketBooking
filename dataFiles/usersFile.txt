@@ -1,1 +1,4 @@
 mohamad,1234,0
+moha,123,0
+manager,1234,1
+mohamad,12342,0

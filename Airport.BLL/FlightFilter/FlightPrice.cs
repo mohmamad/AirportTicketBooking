@@ -14,7 +14,7 @@ namespace Airport.BLL.FlightFilter
         {
             for(int i = 0; i < price.Count; i++) 
             {
-                objectTofilter = objectTofilter.Where(obj => obj.FlightPrice.Count == price.Count && obj.FlightPrice[i] == price[i]).ToList();
+                objectTofilter = objectTofilter.Where(obj => obj.FlightPrice[i] == price[i]).ToList();
             }
             return objectTofilter;
         }

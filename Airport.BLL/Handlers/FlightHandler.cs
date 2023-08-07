@@ -21,7 +21,7 @@ namespace Airport.BLL.Handlers
             {
                 flightsList.Add(FlightHandlerUtils.ConvertToFlight(flight));
             }
-            flightsList = flightsList.Where(flight => flight.DepartureDate >= DateTime.Now).Select(flight => flight).ToList();
+            flightsList = flightsList.Where(flight => flight.DepartureDate > DateTime.Now).Select(flight => flight).ToList();
             List<string> flightsCSVFormat = new List<string>();
             foreach (Flight flightData in flightsList)
             {
@@ -102,17 +102,27 @@ namespace Airport.BLL.Handlers
         public List<string> GetValidationModle()
         {
             List<string> fieldsConstraints = new List<string>();
-            fieldsConstraints.Add("Departure Country,Free Text,");
-            fieldsConstraints.Add("Destination Country,Free Text,");
-            fieldsConstraints.Add($"Departure Date,Date Time,Allowed Range: {DateTime.Now} => future");
-            fieldsConstraints.Add("Departure Airport,Free Text,");
-            fieldsConstraints.Add("Arival Country,Free Text,");
-            fieldsConstraints.Add("Economy Class,Free Text,");
-            fieldsConstraints.Add("Economy Class price,Free Text,");
-            fieldsConstraints.Add("Business Class,Free Text,");
-            fieldsConstraints.Add("Business Class price,Free Text,");
-            fieldsConstraints.Add("First Class,Free Text,");
-            fieldsConstraints.Add("First Class price,Free Text,");
+            fieldsConstraints.Add("Departure Country\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Destination Country\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add($"Departure Date\r\nDate Time\r\nRequired\r\nAllowed Range: {DateTime.Now} => future");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Departure Airport\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Arrival Country\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Economy Class\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Economy Class price\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Business Class\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("Business Class price\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("First Class\r\nFree Text\r\nRequired");
+            fieldsConstraints.Add("________________________________________________________");
+            fieldsConstraints.Add("First Class price\r\nFree Text\r\nRequired");
 
 
             return fieldsConstraints;

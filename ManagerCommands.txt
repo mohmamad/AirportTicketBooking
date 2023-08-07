@@ -1,0 +1,4 @@
+1*view valid flights
+2*booking search,<FlightID>,<Price>,<departure country>,<destination country>,<depatrure date>,<departure airport>,<arrival airport>,<passenger>,<class> please fill a " " in the field you do not want to search with.
+3*add flights,<CSV file path>
+4*view model validation
